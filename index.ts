@@ -2,6 +2,7 @@ import { ConstructorDTO, GenerateDTO } from "./src/dto/TopMediAi.dto";
 import { GetVoiceListResponse } from "./src/responses/getVoiceList.responses";
 import { TextToSpeechResponse } from "./src/responses/TextToSpeech.response";
 
+export { EmotionEnums } from "./src/enums/emotion.enum";
 export class TopMediAiClient {
   private apiKey: string;
   constructor(dto: ConstructorDTO) {
