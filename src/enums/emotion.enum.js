@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EmotionEnums = void 0;
+var EmotionEnums;
+(function (EmotionEnums) {
+    EmotionEnums["Angry"] = "Angry";
+    EmotionEnums["Cheerful"] = "Cheerful";
+    EmotionEnums["Sad"] = "Sad";
+    EmotionEnums["Excited"] = "Excited";
+    EmotionEnums["Friendly"] = "Friendly";
+    EmotionEnums["Terrified"] = "Terrified";
+    EmotionEnums["Shouting"] = "Shouting";
+    EmotionEnums["Unfriendly"] = "Unfriendly";
+    EmotionEnums["Whispering"] = "Whispering";
+    EmotionEnums["Hopeful"] = "Hopeful";
+    EmotionEnums["Soulful"] = "Soulful";
+    EmotionEnums["Pleasant"] = "Pleasant";
+    EmotionEnums["Complaining"] = "Complaining";
+    EmotionEnums["Surprised"] = "Surprised";
+    EmotionEnums["Uneasy"] = "Uneasy";
+    EmotionEnums["Fearful"] = "Fearful";
+    EmotionEnums["Disgust"] = "Disgust";
+})(EmotionEnums || (exports.EmotionEnums = EmotionEnums = {}));
