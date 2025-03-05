@@ -1,5 +1,5 @@
 export interface Voice {
-  languageName: string; // voice's language
+  Languagename: string; // voice's language
   plan: number;
   speaker: string;
   classification?: string;
