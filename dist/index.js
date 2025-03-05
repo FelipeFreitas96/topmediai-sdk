@@ -40,6 +40,27 @@ class TopMediAiClient {
             });
         });
     }
+    getApiKeyInfo() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+                if (this.isApiKeySetted()) {
+                    const response = yield fetch("https://api.topmediai.com/v1/get_api_key_info", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "x-api-key": this.apiKey,
+                        },
+                    });
+                    if (!response.ok) {
+                        const errorResponse = yield response.json();
+                        return reject(errorResponse);
+                    }
+                    const jsonResponse = yield response.json();
+                    return resolve(jsonResponse);
+                }
+            }));
+        });
+    }
     generate(dto) {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
@@ -53,6 +74,10 @@ class TopMediAiClient {
                             },
                             body: JSON.stringify(dto),
                         });
+                        if (!response.ok) {
+                            const errorResponse = yield response.json();
+                            return reject(errorResponse);
+                        }
                         const jsonResponse = yield response.json();
                         const fileResponse = yield fetch(jsonResponse.data.oss_url);
                         const arrayBuffer = yield fileResponse.arrayBuffer();

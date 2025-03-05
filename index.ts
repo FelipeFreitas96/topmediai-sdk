@@ -1,4 +1,5 @@
 import { ConstructorDTO, GenerateDTO } from "./src/dto/TopMediAi.dto";
+import { GetApiKeyInfoResponse } from "./src/responses/getApiKeyInfo.response";
 import { GetVoiceListResponse } from "./src/responses/getVoiceList.responses";
 import { TextToSpeechResponse } from "./src/responses/TextToSpeech.response";
 
@@ -33,6 +34,31 @@ export class TopMediAiClient {
     });
   }
 
+  async getApiKeyInfo() {
+    return new Promise<GetApiKeyInfoResponse>(async (resolve, reject) => {
+      if (this.isApiKeySetted()) {
+        const response = await fetch(
+          "https://api.topmediai.com/v1/get_api_key_info",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "x-api-key": this.apiKey,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          const errorResponse = await response.json();
+          return reject(errorResponse);
+        }
+
+        const jsonResponse: GetApiKeyInfoResponse = await response.json();
+        return resolve(jsonResponse);
+      }
+    });
+  }
+
   async generate(dto: GenerateDTO) {
     return new Promise<Buffer>(async (resolve, reject) => {
       if (this.isApiKeySetted()) {
@@ -48,6 +74,12 @@ export class TopMediAiClient {
               body: JSON.stringify(dto),
             }
           );
+
+          if (!response.ok) {
+            const errorResponse = await response.json();
+            return reject(errorResponse);
+          }
+
           const jsonResponse: TextToSpeechResponse = await response.json();
           const fileResponse = await fetch(jsonResponse.data.oss_url);
           const arrayBuffer = await fileResponse.arrayBuffer();
